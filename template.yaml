@@ -1,0 +1,42 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  twitter-auto-delete
+
+  Sample SAM Template for twitter-auto-delete
+  
+Globals:
+  Function:
+    Timeout: 60
+
+Resources:
+  TwitterAutoDeleteFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: twitter-auto-delete/
+      Handler: app.handler
+      Runtime: nodejs12.x
+      Environment: 
+        Variables:
+          CONSUMER_KEY: VALUE
+          CONSUMER_SECRET: VALUE
+          ACCESS_TOKEN: VALUE
+          ACCESS_TOKEN_SECRET: VALUE
+          TWITTER_USERNAME: VALUE
+          DAYS_OLD_DELETE: VALUE
+      Events:
+        TwitterAutoDelete:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1 day)
+            Name: daily-delete
+            Description: daily-delete
+            Enabled: True
+
+Outputs:
+  TwitterAutoDeleteFunction:
+    Description: "Lambda Function ARN"
+    Value: !GetAtt TwitterAutoDeleteFunction.Arn
+  TwitterAutoDeleteFunctionIamRole:
+    Description: "Implicit IAM Role created for function"
+    Value: !GetAtt TwitterAutoDeleteFunctionRole.Arn
