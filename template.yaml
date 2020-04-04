@@ -2,8 +2,6 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
   twitter-auto-delete
-
-  Sample SAM Template for twitter-auto-delete
   
 Globals:
   Function:

@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "twit": "^2.2.11"
+    "twitter-lite": "^0.9.4"
   },
   "devDependencies": {},
   "scripts": {
