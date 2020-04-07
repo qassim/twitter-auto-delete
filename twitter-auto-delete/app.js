@@ -44,6 +44,9 @@ const deleteTweets = async (tweets) => {
 exports.handler = async () => {
   const now = Date.now();
   const tweets = await getAllTweets();
+
+  console.log(`Got ${tweets.length} tweets for user ${TWITTER_USERNAME}. Checking for tweets to delete...`)
+
   const tweetsToDelete = tweets.filter((tweet) => {
     const tweetTime = Date.parse(tweet.created_at)
     const nowTS = new Date(now);
