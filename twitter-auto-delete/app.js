@@ -34,7 +34,7 @@ const deleteTweets = async (tweets) => {
 
     return new Promise((resolve) => setTimeout(() => {
       console.log(`Deleting tweet id: ${tweet.id_str}`);
-      return resolve(client.post(`statuses/destroy/:id`, { id: tweet.id_str }))
+      return resolve(client.post('statuses/destroy', { id: tweet.id_str }))
     }, currentTimeout));
   })
 
