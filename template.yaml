@@ -22,6 +22,7 @@ Resources:
           ACCESS_TOKEN_SECRET: VALUE
           TWITTER_USERNAME: VALUE
           DAYS_OLD_DELETE: VALUE
+          ARCHIVE_BUCKET: 'deleted-tweets-archive'
       Events:
         TwitterAutoDelete:
           Type: Schedule
@@ -30,6 +31,19 @@ Resources:
             Name: daily-delete
             Description: daily-delete
             Enabled: True
+      Policies:
+        - AWSLambdaExecute
+        - Version: '2012-10-17' 
+          Statement:
+            - Effect: Allow
+              Action:
+                - s3:*Object
+              Resource: !GetAtt S3TweetArchiveBucket.Arn
+  S3TweetArchiveBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: 'deleted-tweets-archive'
+        
 
 Outputs:
   TwitterAutoDeleteFunction:
